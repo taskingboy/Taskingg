@@ -1,0 +1,958 @@
+16 – GREEN                       14- YELLOW                14- NO COLOR
+
+1.	Write a Python program to merge two text files and also count the number of lines in the merged text file.
+
+# Function to merge two text files and count lines
+def merge_and_count_lines(file1_path, file2_path, merged_file_path):
+    try:
+        # Open the first file in read mode
+        with open(file1_path, 'r') as file1:
+            # Read content of the first file
+            content1 = file1.read()
+
+        # Open the second file in read mode
+        with open(file2_path, 'r') as file2:
+            # Read content of the second file
+            content2 = file2.read()
+
+        # Combine the content of the two files
+        merged_content = content1 + '\n' + content2
+
+        # Write the merged content to a new file
+        with open(merged_file_path, 'w') as merged_file:
+            merged_file.write(merged_content)
+
+        # Count the number of lines in the merged file
+        with open(merged_file_path, 'r') as merged_file:
+            line_count = len(merged_file.readlines())
+
+        print(f'Merged file created at {merged_file_path}')
+        print(f'Number of lines in the merged file: {line_count}')
+
+    except Exception as e:
+        print(f'An error occurred: {e}')
+
+# Example usage
+merge_and_count_lines('file1.txt', 'file2.txt', 'merged_file.txt')
+
+2.	Create a class STORE to keep track of products (Product Code, Name and price). Display the menu of all products to the user. Generate bill as per order
+
+
+# Define the STORE class
+class STORE:
+    def __init__(self):
+        # Initialize an empty dictionary to store products
+        self.products = {}
+
+    def add_product(self, code, name, price):
+        # Add a product to the dictionary
+        self.products[code] = {'name': name, 'price': price}
+
+    def display_menu(self):
+        # Display the menu of all products
+        print('Product Menu:')
+        for code, info in self.products.items():
+            print(f'{code}: {info["name"]} - ${info["price"]}')
+
+    def generate_bill(self, order):
+        total_cost = 0
+        print('\nYour Bill:')
+        print('Product\t\t\tPrice')
+        print('-------------------------')
+        for code, quantity in order.items():
+            if code in self.products:
+                product_info = self.products[code]
+                cost = product_info['price'] * quantity
+                total_cost += cost
+                print(f'{product_info["name"]}\t\t${product_info["price"]} x {quantity}\t\t${cost}')
+            else:
+                print(f'Product with code {code} not found in the menu')
+
+        print('-------------------------')
+        print(f'Total\t\t\t\t${total_cost}')
+
+# Example usage
+store = STORE()
+store.add_product('P001', 'Product1', 10.99)
+store.add_product('P002', 'Product2', 15.50)
+store.add_product('P003', 'Product3', 8.75)
+
+store.display_menu()
+
+order = {'P001': 2, 'P002': 1, 'P004': 3}  # User's order
+store.generate_bill(order)
+
+3.	Write a Python program to sort a list of elements using the selection sort algorithm
+
+# Function to perform selection sort on a list
+def selection_sort(input_list):
+    n = len(input_list)
+
+    # Traverse through all array elements starting from 0
+    for i in range(n):
+        # Find the minimum element in the remaining unsorted array
+        min_index = i
+        for j in range(i + 1, n):
+            if input_list[j] < input_list[min_index]:
+                min_index = j
+
+        # Swap the found minimum element with the first element
+        input_list[i], input_list[min_index] = input_list[min_index], input_list[i]
+
+# Example usage
+my_list = [64, 25, 12, 22, 11]
+print(f'Original List: {my_list}')
+
+selection_sort(my_list)
+
+print(f'Sorted List: {my_list}')
+
+
+4.	Write a Python class that has two methods get_string and print_string. Get_string accept a string from the user and print_string print the string in upper case.
+
+
+class StringManipulator:
+    def __init__(self):
+        self.input_string = ""
+
+    def get_string(self):
+        # Accept a string from the user
+        self.input_string = input("Enter a string: ")
+
+    def print_string(self):
+        # Print the string in upper case
+        print("Uppercase String:", self.input_string.upper())
+
+# Example usage
+string_manipulator = StringManipulator()
+string_manipulator.get_string()
+string_manipulator.print_string()
+
+
+5.	Write a python program to count repeated characters in a string 
+
+Sample String :”thequickbrownfoxjumpsoverthelazydog”
+Expected output:
+o  4
+e  3
+u  2
+h  2
+r   2
+t   2
+
+def count_repeated_characters(input_string):
+    char_count = {}
+    
+    for char in input_string:
+        if char.isalpha():
+            char = char.lower()
+            char_count[char] = char_count.get(char, 0) + 1
+
+    for char, count in char_count.items():
+        if count > 1:
+            print(f'{char}: {count}')
+
+# Example usage
+sample_string = "thequickbrownfoxjumpsoverthelazydog"
+print("Sample String:", sample_string)
+print("Repeated Characters:")
+count_repeated_characters(sample_string)
+
+
+6.	Print the pyramid
+*
+*   *
+*   *    *
+      AND
+       Print the pattern
+       *    *    *
+       *    *    *
+       *    *    *
+
+# Pyramid
+def print_pyramid(rows):
+    for i in range(1, rows + 1):
+        for j in range(1, i + 1):
+            print("*", end="   ")
+        print()
+
+# Example usage
+print("Pyramid:")
+print_pyramid(3)
+
+# Pattern
+def print_pattern(rows):
+    for i in range(rows):
+        for j in range(3):
+            print("*", end="    ")
+        print()
+
+# Example usage
+print("\nPattern:")
+print_pattern(3)
+
+7.	Print the pyramid
+1
+1   2
+1   2    3
+def print_number_pyramid(rows):
+    for i in range(1, rows + 1):
+        for j in range(1, i + 1):
+            print(j, end="   ")
+        print()
+
+# Example usage
+print("Number Pyramid:")
+print_number_pyramid(3)
+8.	Write a python program to print the alphabet pattern ‘O’ and the pattern ‘P’
+
+Expected Output:
+***
+*  *
+*  *
+*  *
+*  *
+*  *
+***
+AND
+****
+*     *
+*     *
+****
+*
+*
+*
+
+# Alphabet Pattern 'O'
+def print_pattern_O():
+    print("***")
+    print("* *")
+    print("* *")
+    print("* *")
+    print("* *")
+    print("* *")
+    print("***")
+
+# Alphabet Pattern 'P'
+def print_pattern_P():
+    print("****")
+    print("*   *")
+    print("*   *")
+    print("****")
+    print("*")
+    print("*")
+    print("*")
+
+# Example usage
+print("Alphabet Pattern 'O':")
+print_pattern_O()
+
+print("\nAlphabet Pattern 'P':")
+print_pattern_P()
+
+9.	Create an EMPLOYEE class for storing details(Name, Designation, gender, date of joining and salary).Define function members to compute
+a.	Total number of employees in an organization
+b.	Count male and female employees
+c.	An employee with a salary of more than 10,000
+d.	Employee with designation “Manager”
+class EMPLOYEE:
+    # Class variable to store the total number of employees
+    total_employees = 0
+
+    def __init__(self, name, designation, gender, join_date, salary):
+        self.name = name
+        self.designation = designation
+        self.gender = gender
+        self.join_date = join_date
+        self.salary = salary
+
+        # Increment the total number of employees when a new employee is created
+        EMPLOYEE.total_employees += 1
+
+    @staticmethod
+    def total_employees_in_organization():
+        return EMPLOYEE.total_employees
+
+    @staticmethod
+    def count_male_and_female_employees(employees_list):
+        male_count = sum(1 for emp in employees_list if emp.gender.lower() == 'male')
+        female_count = sum(1 for emp in employees_list if emp.gender.lower() == 'female')
+        return male_count, female_count
+
+    @staticmethod
+    def employees_with_salary_above_10000(employees_list):
+        return [emp for emp in employees_list if emp.salary > 10000]
+
+    @staticmethod
+    def employees_with_designation_manager(employees_list):
+        return [emp for emp in employees_list if emp.designation.lower() == 'manager']
+
+# Example usage
+employee1 = EMPLOYEE("John Doe", "Manager", "Male", "2022-01-01", 12000)
+employee2 = EMPLOYEE("Jane Doe", "Developer", "Female", "2022-02-01", 8000)
+employee3 = EMPLOYEE("Bob Smith", "Manager", "Male", "2022-03-01", 15000)
+
+employees_list = [employee1, employee2, employee3]
+
+print("Total Employees in Organization:", EMPLOYEE.total_employees_in_organization())
+print("Male and Female Employee Counts:", EMPLOYEE.count_male_and_female_employees(employees_list))
+print("Employees with Salary above 10,000:", EMPLOYEE.employees_with_salary_above_10000(employees_list))
+print("Employees with Designation 'Manager':", EMPLOYEE.employees_with_designation_manager(employees_list))
+
+
+
+10.	Write a Python program to construct the following pattern using a nested loop
+*
+*   *
+*   *    *
+*   *    *    *   
+*   *    *    *    *
+*   *    *    *   
+*   *    *
+*   *
+*
+
+# Nested Loop Pattern
+def print_nested_loop_pattern(rows):
+    for i in range(rows):
+        for j in range(i + 1):
+            print("*", end="   ")
+        print()
+    for i in range(rows - 2, -1, -1):
+        for j in range(i + 1):
+            print("*", end="   ")
+        print()
+
+# Example usage
+print("Nested Loop Pattern:")
+print_nested_loop_pattern(5)
+
+
+11.	Given two lists create a third list by picking an odd-index element from the first list and even index elements from the second
+# Given two lists, create a third list
+def create_third_list(list1, list2):
+    third_list = []
+    # Pick odd-index elements from the first list
+    third_list.extend(list1[1::2])
+    # Pick even-index elements from the second list
+    third_list.extend(list2[::2])
+    return third_list
+
+# Example usage
+list1 = [1, 2, 3, 4, 5]
+list2 = [10, 20, 30, 40, 50]
+
+result_list = create_third_list(list1, list2)
+print("Third List:", result_list)
+
+
+12.	a. Write a program to print each line of a text file in reverse order
+b. Print the substring from the input string “Vishwakarma University” from index 2 to 14
+
+# a. Print each line of a text file in reverse order
+with open('textfile.txt', 'r') as file:
+    lines = file.readlines()
+    reversed_lines = [line.strip()[::-1] for line in lines]
+    print("Reversed Lines:")
+    for line in reversed_lines:
+        print(line)
+
+# b. Print substring from the input string
+input_string = "Vishwakarma University"
+substring = input_string[2:15]
+print("Substring:", substring)
+
+13.	Write a Pandas program to add, subtract, multiple and divide two Pandas Series. 
+Sample Series: [2, 4, 6, 8, 10], [1, 3, 5, 7, 9]
+
+import pandas as pd
+
+# Sample Series
+series1 = pd.Series([2, 4, 6, 8, 10])
+series2 = pd.Series([1, 3, 5, 7, 9])
+
+# Perform operations on Series
+result_add = series1 + series2
+result_subtract = series1 - series2
+result_multiply = series1 * series2
+result_divide = series1 / series2
+
+print("Addition:\n", result_add)
+print("\nSubtraction:\n", result_subtract)
+print("\nMultiplication:\n", result_multiply)
+print("\nDivision:\n", result_divide)
+
+
+14.	Write a Pandas program to sort a given Series. 
+
+Original Data Series: 
+
+0 100
+1 200
+2 python
+3 300.12
+4 400
+dtype: object
+
+import pandas as pd
+
+# Original Data Series
+data_series = pd.Series(['100', '200', 'python', '300.12', '400'])
+
+# Convert the series to numeric (ignore errors for non-numeric values)
+numeric_series = pd.to_numeric(data_series, errors='coerce')
+
+# Sort the numeric series
+sorted_series = numeric_series.sort_values()
+
+print("Sorted Data Series:\n", sorted_series)
+
+15.	Write a Pandas program to select the 'name' and 'score' columns from the following DataFrame.
+Sample Python dictionary data and list labels:
+exam_data = {'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'],
+'score': [12.5, 9, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19],
+'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes']}
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+import pandas as pd
+import numpy as np
+
+# Sample Python dictionary data and list labels
+exam_data = {
+    'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'],
+    'score': [12.5, 9, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19],
+    'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+    'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes']
+}
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+# Create DataFrame
+df = pd.DataFrame(exam_data, index=labels)
+
+# Select 'name' and 'score' columns
+selected_columns = df[['name', 'score']]
+
+print("Selected Columns:\n", selected_columns)
+
+16.	Write a Python program to print alphabet pattern 'R' and pattern’O’ 
+Expected Output:
+                                                                
+ *   *                                                                  
+ *   *                                                                  
+ ****                                                                   
+ * *                                                                    
+ *  *                                                                   
+ *   *
+AND
+  ***                                                                   
+ *   *                                                                  
+ *   *                                                                  
+ *   *                                                                  
+ *   *                                                                 
+ *   *                                                                  
+  *** 
+
+# Alphabet Pattern 'R'
+def print_pattern_R():
+    print("****")
+    print("*   *")
+    print("*   *")
+    print("****")
+    print("* *")
+    print("*  *")
+    print("*   *")
+
+# Alphabet Pattern 'O'
+def print_pattern_O():
+    print(" *** ")
+    print("*   *")
+    print("*   *")
+    print("*   *")
+    print("*   *")
+    print("*   *")
+    print(" *** ")
+
+# Example usage
+print("Alphabet Pattern 'R':")
+print_pattern_R()
+
+print("\nAlphabet Pattern 'O':")
+print_pattern_O()
+
+
+17.	Write a Python program that matches a word containing 'z', not at the start or end of the word and match a string that contains only upper and lowercase letters, numbers, and underscores by using function
+
+import re
+
+def match_word_with_z(word):
+    pattern = r'\b\w*z\w*\b'
+    return re.search(pattern, word) is not None
+
+def match_string_pattern(input_string):
+    pattern = r'^[a-zA-Z0-9_]+$'
+    return re.match(pattern, input_string) is not None
+
+# Example usage
+word_to_match = "python"
+string_to_match = "Abcd_123"
+
+print(f"Match word with 'z': {match_word_with_z(word_to_match)}")
+print(f"Match string pattern: {match_string_pattern(string_to_match)}")
+
+
+18.	Write a Python class named Rectangle constructed by a length and width and a method which will compute the area of a rectangle.
+
+class Rectangle:
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def compute_area(self):
+        return self.length * self.width
+
+# Example usage
+rectangle = Rectangle(5, 8)
+area = rectangle.compute_area()
+print(f"Area of the rectangle: {area}")
+
+19.	To calculate salary of an employee given his basic pay (take as input from user). Calculate gross salary of employee. Let HRA be 10 % of basic pay and TA be 5% of basic pay. Let employee pay professional tax as 2% of total salary. Calculate net salary payable after deductions.
+
+# Function to calculate net salary
+def calculate_net_salary(basic_pay):
+    HRA = 0.10 * basic_pay
+    TA = 0.05 * basic_pay
+    gross_salary = basic_pay + HRA + TA
+    professional_tax = 0.02 * gross_salary
+    net_salary = gross_salary - professional_tax
+    return net_salary
+
+# Example usage
+basic_pay_input = float(input("Enter basic pay: "))
+net_salary_result = calculate_net_salary(basic_pay_input)
+print(f"Net Salary: {net_salary_result}")
+
+
+20.	Find the factorial of a number by using function. Accept a number from user and reverse the number by using function.
+
+# Function to calculate factorial of a number
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+# Function to reverse a number
+def reverse_number(num):
+    return int(str(num)[::-1])
+
+# Example usage
+number_input = int(input("Enter a number: "))
+factorial_result = factorial(number_input)
+reverse_result = reverse_number(number_input)
+print(f"Factorial: {factorial_result}")
+print(f"Reverse Number: {reverse_result}")
+
+21.	Write a Python program to count the number of words in a sentence
+
+# Function to count words in a sentence
+def count_words(sentence):
+    words = sentence.split()
+    return len(words)
+
+# Example usage
+sentence_input = input("Enter a sentence: ")
+word_count_result = count_words(sentence_input)
+print(f"Number of words in the sentence: {word_count_result}")
+
+22.	 Write a Python program to add, multiply two matrices using numpy
+
+import numpy as np
+
+# Function to add matrices
+def add_matrices(matrix1, matrix2):
+    return np.add(matrix1, matrix2)
+
+# Function to multiply matrices
+def multiply_matrices(matrix1, matrix2):
+    return np.dot(matrix1, matrix2)
+
+# Example usage
+matrix1 = np.array([[1, 2], [3, 4]])
+matrix2 = np.array([[5, 6], [7, 8]])
+
+sum_result = add_matrices(matrix1, matrix2)
+product_result = multiply_matrices(matrix1, matrix2)
+
+print("Sum of Matrices:\n", sum_result)
+print("\nProduct of Matrices:\n", product_result)
+	
+23.	Write a Python program to count number of characters, words, spaces and lines in a file.
+# Function to count characters, words, spaces, and lines in a file
+def count_file_stats(file_path):
+    with open(file_path, 'r') as file:
+        content = file.read()
+        char_count = len(content)
+        word_count = len(content.split())
+        space_count = content.count(' ')
+        line_count = content.count('\n')
+
+    return char_count, word_count, space_count, line_count
+
+# Example usage
+file_path = 'sample.txt'  # Replace with the actual file path
+char_count, word_count, space_count, line_count = count_file_stats(file_path)
+
+print(f"Character Count: {char_count}")
+print(f"Word Count: {word_count}")
+print(f"Space Count: {space_count}")
+print(f"Line Count: {line_count}")
+
+24.	a) Write a program that matches a word containing ‘z’.
+b) Write a program that matches a string that has an a followed by zero or more b’s.
+# a) Program that matches a word containing 'z'
+def match_word_with_z_updated(word):
+    pattern = r'\b\w*z\w*\b'
+    return re.search(pattern, word) is not None
+
+# b) Program that matches a string with 'a' followed by zero or more 'b's
+def match_string_pattern_updated(input_string):
+    pattern = r'^a(b*)$'
+    return re.match(pattern, input_string) is not None
+
+# Example usage
+word_to_match_updated = "zebra"
+string_to_match_updated = "abbbb"
+
+print(f"Match word with 'z': {match_word_with_z_updated(word_to_match_updated)}")
+print(f"Match string pattern: {match_string_pattern_updated(string_to_match_updated)}")
+25.	Write a program that accepts a list from user and print the alternate element of list.
+# Function to print alternate elements of a list
+def print_alternate_elements(my_list):
+    for i in range(0, len(my_list), 2):
+        print(my_list[i])
+
+# Example usage
+user_list = input("Enter a list (comma-separated): ").split(',')
+print("Alternate Elements of the List:")
+print_alternate_elements(user_list)
+
+26.	Write a program that reads an integer value n from the user, and then produces n lines of output. The first line contains 1 star, the second 2 stars, and so on until the last line, which should have n stars. Can you write this using only a single loop? Hint:
+Remember what the expression ‘+’*5 does.
+Enter a size: 5
++
+++
++++
+++++
++++++
+
+# Program to produce star pattern using a single loop
+def star_pattern(n):
+    for i in range(1, n + 1):
+        print('+' * i)
+
+# Example usage
+size = int(input("Enter a size: "))
+star_pattern(size)
+
+27.	Sort following NumPy array
+Case 1: Sort array by the second row
+Case 2: Sort the array by the second column
+sampleArray = numpy.array([[34,43,73],[82,22,12],[53,94,66]])
+import numpy as np
+
+# Case 1: Sort array by the second row
+sampleArray = np.array([[34, 43, 73], [82, 22, 12], [53, 94, 66]])
+sorted_array_row = sampleArray[:, sampleArray[1, :].argsort()]
+
+# Case 2: Sort array by the second column
+sorted_array_col = sampleArray[sampleArray[:, 1].argsort()]
+
+print("Sorted array by the second row:\n", sorted_array_row)
+print("\nSorted array by the second column:\n", sorted_array_col)
+
+
+28.	Take two input strings, concatenate them, and print the output. Also, Reverse the string and print it.
+
+# Concatenate and reverse strings
+string1 = input("Enter the first string: ")
+string2 = input("Enter the second string: ")
+
+concatenated_string = string1 + string2
+reversed_string = concatenated_string[::-1]
+
+print("Concatenated String:", concatenated_string)
+print("Reversed String:", reversed_string)
+
+29.	Write a Python program to find maximum and minimum K elements in Tuple. Take user input for K.
+
+# Find maximum and minimum K elements in Tuple
+k = int(input("Enter the value of K: "))
+my_tuple = (5, 8, 2, 10, 3, 7, 1)
+
+max_k_elements = sorted(my_tuple, reverse=True)[:k]
+min_k_elements = sorted(my_tuple)[:k]
+
+print(f"Maximum {k} elements: {max_k_elements}")
+print(f"Minimum {k} elements: {min_k_elements}")
+
+30.	Write a python program to search some literals strings in a string from a file.
+Sample text : “the quick brown fox jumps over the lazy dog”
+Searched words : “fox”,”dog”,”horse”
+
+# Search literal strings in a string from a file
+sample_text = "the quick brown fox jumps over the lazy dog"
+
+search_words = ["fox", "dog", "horse"]
+
+for word in search_words:
+    if word in sample_text:
+        print(f"{word} found in the text.")
+    else:
+        print(f"{word} not found in the text.")
+
+31.	Write a python program to check whether a string contains all letters of the alphabet
+
+# Check whether a string contains all letters of the alphabet
+import string
+
+def check_alphabet(string_to_check):
+    alphabet_set = set(string.ascii_lowercase)
+    return set(string_to_check.lower()) >= alphabet_set
+
+# Example usage
+input_string = input("Enter a string: ")
+if check_alphabet(input_string):
+    print("The string contains all letters of the alphabet.")
+else:
+    print("The string does not contain all letters of the alphabet.")
+
+32.	Write a Python class to implement pow(x,n)
+
+# Python class to implement pow(x, n)
+class PowerCalculator:
+    @staticmethod
+    def power(x, n):
+        return x ** n
+
+# Example usage
+calculator = PowerCalculator()
+result = calculator.power(2, 3)
+print(f"Result of pow(2, 3): {result}")
+
+33.	Write a Python program to swap two elements in a list. Take user input for the swap index
+# Python program to swap two elements in a list
+def swap_elements(my_list, index1, index2):
+    my_list[index1], my_list[index2] = my_list[index2], my_list[index1]
+
+# Example usage
+user_list = [10, 20, 30, 40, 50]
+print("Original List:", user_list)
+
+index1 = int(input("Enter the first index to swap: "))
+index2 = int(input("Enter the second index to swap: "))
+
+swap_elements(user_list, index1, index2)
+print("List after swapping elements:", user_list)
+
+
+34.	Write a Python program to create a file where all letters of the English alphabet are listed by a specified number of letters on each line
+
+# Python program to create a file listing English alphabet letters
+with open('alphabet_list.txt', 'w') as file:
+    for letter in string.ascii_uppercase:
+        file.write(f"{letter}\n")
+
+35.	Generate two lists of random data and create a scatter plot to visualize their relationship. Label the axes 
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate two lists of random data
+list1 = np.random.rand(10)
+list2 = np.random.rand(10)
+
+# Scatter plot
+plt.scatter(list1, list2)
+plt.xlabel('List 1')
+plt.ylabel('List 2')
+plt.title('Scatter Plot of Two Lists')
+plt.show()
+
+36.	 Write a Python program that calculates basic statistical operations, including mean, median, and standard deviation, on a given NumPy array
+
+import numpy as np
+
+# Calculate mean, median, and standard deviation
+my_array = np.array([1, 2, 3, 4, 5])
+
+mean_value = np.mean(my_array)
+median_value = np.median(my_array)
+std_deviation = np.std(my_array)
+
+print("Mean:", mean_value)
+print("Median:", median_value)
+print("Standard Deviation:", std_deviation)
+
+37.	Design a class hierarchy for a restaurant management system. Define the relevant attributes and methods for the classes.
+a. Create a base class Dish with attributes such as dish_name, price, and cuisine_type.
+b. Derive a subclass Appetizer from Dish to represent appetizer items.
+c. Further derive a class VegetarianAppetizer from Appetizer to represent vegetarian appetizer items.
+
+# Restaurant Management System Class Hierarchy
+class Dish:
+    def __init__(self, dish_name, price, cuisine_type):
+        self.dish_name = dish_name
+        self.price = price
+        self.cuisine_type = cuisine_type
+
+class Appetizer(Dish):
+    def __init__(self, dish_name, price, cuisine_type, is_vegetarian):
+        super().__init__(dish_name, price, cuisine_type)
+        self.is_vegetarian = is_vegetarian
+
+class VegetarianAppetizer(Appetizer):
+    def __init__(self, dish_name, price):
+        super().__init__(dish_name, price, "Vegetarian", True)
+
+# Example usage
+dish1 = Dish("Pasta", 15.99, "Italian")
+appetizer1 = Appetizer("Spring Rolls", 8.99, "Chinese", False)
+veg_appetizer1 = VegetarianAppetizer("Bruschetta", 7.99)
+
+38.	Write a Python function to create and print a list where the values are square of numbers between 1 and 30 (both included)
+# Python function to create and print a list where the values are squares of numbers between 1 and 30
+def square_list():
+    squares = [i ** 2 for i in range(1, 31)]
+    return squares
+
+# Example usage
+result_list = square_list()
+print("List of Squares:", result_list)
+
+39.	Design a class hierarchy for a ticket booking management system. Define the relevant attributes and methods for the classes.
+a. Derive subclasses such as Ticket, MovieTicket, and ConcertTicket. Add appropriate attributes and methods to represent different types of tickets.
+b. Create a class BookingSystem that inherits from Ticket to manage the overall ticket booking process
+
+# Ticket Booking Management System Class Hierarchy
+class Ticket:
+    def __init__(self, ticket_number, price):
+        self.ticket_number = ticket_number
+        self.price = price
+
+class MovieTicket(Ticket):
+    def __init__(self, ticket_number, price, movie_name, show_time):
+        super().__init__(ticket_number, price)
+        self.movie_name = movie_name
+        self.show_time = show_time
+
+class ConcertTicket(Ticket):
+    def __init__(self, ticket_number, price, artist_name, venue):
+        super().__init__(ticket_number, price)
+        self.artist_name = artist_name
+        self.venue = venue
+
+class BookingSystem(Ticket):
+    def __init__(self, booking_id):
+        self.booking_id = booking_id
+
+40.	Write a Python program to shuffle the elements of a given list
+
+import random
+
+# Python program to shuffle the elements of a given list
+def shuffle_list(input_list):
+    random.shuffle(input_list)
+    return input_list
+
+# Example usage
+original_list = [1, 2, 3, 4, 5]
+shuffled_list = shuffle_list(original_list)
+print("Original List:", original_list)
+print("Shuffled List:", shuffled_list)
+
+41.	Calculate the number of days between the two given dates
+from datetime import datetime
+
+# Calculate the number of days between two given dates
+date_format = "%Y-%m-%d"
+
+start_date_str = input("Enter the start date (YYYY-MM-DD): ")
+end_date_str = input("Enter the end date (YYYY-MM-DD): ")
+
+start_date = datetime.strptime(start_date_str, date_format)
+end_date = datetime.strptime(end_date_str, date_format)
+
+days_difference = (end_date - start_date).days
+print(f"Number of days between the two dates: {days_difference}")
+
+42.	Write a program to count no. of vowels in a string
+
+# Python program to count the number of vowels in a string
+def count_vowels(input_string):
+    vowels = "AEIOUaeiou"
+    vowel_count = sum(1 for char in input_string if char in vowels)
+    return vowel_count
+
+# Example usage
+user_string = input("Enter a string: ")
+vowel_count_result = count_vowels(user_string)
+print(f"Number of vowels in the string: {vowel_count_result}")
+
+43.	Create a result array by adding the following two NumPy arrays. Next, modify the result array by calculating the square of each element. Also generate the transposition of an array using the tool numpy
+
+import numpy as np
+
+# NumPy array operations: addition, square, and transposition
+array1 = np.array([1, 2, 3])
+array2 = np.array([4, 5, 6])
+
+# Addition
+result_array = np.add(array1, array2)
+
+# Square
+squared_array = np.square(result_array)
+
+# Transposition
+transposed_array = np.transpose(result_array)
+
+print("Result of addition:\n", result_array)
+print("\nSquared result array:\n", squared_array)
+print("\nTransposed result array:\n", transposed_array)
+
+
+44.	Write a python program to copy one file to another file and the first two lines from the copied file.
+import numpy as np
+
+# NumPy array operations: addition, square, and transposition
+array1 = np.array([1, 2, 3])
+array2 = np.array([4, 5, 6])
+
+# Addition
+result_array = np.add(array1, array2)
+
+# Square
+squared_array = np.square(result_array)
+
+# Transposition
+transposed_array = np.transpose(result_array)
+
+print("Result of addition:\n", result_array)
+print("\nSquared result array:\n", squared_array)
+print("\nTransposed result array:\n", transposed_array)
+45.	Write a python program to check how many times a given number can be divided by 3 before it is less than or equal to 10.
+
+# Python program to check how many times a given number can be divided by 3
+def count_divisions_by_3(number):
+    count = 0
+    while number > 10:
+        number /= 3
+        count += 1
+    return count
+
+# Example usage
+user_number = int(input("Enter a number: "))
+division_count = count_divisions_by_3(user_number)
+print(f"The number can be divided by 3 {division_count} times before it is less than or equal to 10.")
+
+
