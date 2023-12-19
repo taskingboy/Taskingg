@@ -1,0 +1,158 @@
+
+21.	Write a Python program to count the number of words in a sentence
+
+# Function to count words in a sentence
+def count_words(sentence):
+    words = sentence.split()
+    return len(words)
+
+# Example usage
+sentence_input = input("Enter a sentence: ")
+word_count_result = count_words(sentence_input)
+print(f"Number of words in the sentence: {word_count_result}")
+
+22.	 Write a Python program to add, multiply two matrices using numpy
+
+import numpy as np
+
+# Function to add matrices
+def add_matrices(matrix1, matrix2):
+    return np.add(matrix1, matrix2)
+
+# Function to multiply matrices
+def multiply_matrices(matrix1, matrix2):
+    return np.dot(matrix1, matrix2)
+
+# Example usage
+matrix1 = np.array([[1, 2], [3, 4]])
+matrix2 = np.array([[5, 6], [7, 8]])
+
+sum_result = add_matrices(matrix1, matrix2)
+product_result = multiply_matrices(matrix1, matrix2)
+
+print("Sum of Matrices:\n", sum_result)
+print("\nProduct of Matrices:\n", product_result)
+	
+23.	Write a Python program to count number of characters, words, spaces and lines in a file.
+# Function to count characters, words, spaces, and lines in a file
+def count_file_stats(file_path):
+    with open(file_path, 'r') as file:
+        content = file.read()
+        char_count = len(content)
+        word_count = len(content.split())
+        space_count = content.count(' ')
+        line_count = content.count('\n')
+
+    return char_count, word_count, space_count, line_count
+
+# Example usage
+file_path = 'sample.txt'  # Replace with the actual file path
+char_count, word_count, space_count, line_count = count_file_stats(file_path)
+
+print(f"Character Count: {char_count}")
+print(f"Word Count: {word_count}")
+print(f"Space Count: {space_count}")
+print(f"Line Count: {line_count}")
+
+24.	a) Write a program that matches a word containing ‘z’.
+b) Write a program that matches a string that has an a followed by zero or more b’s.
+# a) Program that matches a word containing 'z'
+def match_word_with_z_updated(word):
+    pattern = r'\b\w*z\w*\b'
+    return re.search(pattern, word) is not None
+
+# b) Program that matches a string with 'a' followed by zero or more 'b's
+def match_string_pattern_updated(input_string):
+    pattern = r'^a(b*)$'
+    return re.match(pattern, input_string) is not None
+
+# Example usage
+word_to_match_updated = "zebra"
+string_to_match_updated = "abbbb"
+
+print(f"Match word with 'z': {match_word_with_z_updated(word_to_match_updated)}")
+print(f"Match string pattern: {match_string_pattern_updated(string_to_match_updated)}")
+25.	Write a program that accepts a list from user and print the alternate element of list.
+# Function to print alternate elements of a list
+def print_alternate_elements(my_list):
+    for i in range(0, len(my_list), 2):
+        print(my_list[i])
+
+# Example usage
+user_list = input("Enter a list (comma-separated): ").split(',')
+print("Alternate Elements of the List:")
+print_alternate_elements(user_list)
+
+26.	Write a program that reads an integer value n from the user, and then produces n lines of output. The first line contains 1 star, the second 2 stars, and so on until the last line, which should have n stars. Can you write this using only a single loop? Hint:
+Remember what the expression ‘+’*5 does.
+Enter a size: 5
++
+++
++++
+++++
++++++
+
+# Program to produce star pattern using a single loop
+def star_pattern(n):
+    for i in range(1, n + 1):
+        print('+' * i)
+
+# Example usage
+size = int(input("Enter a size: "))
+star_pattern(size)
+
+27.	Sort following NumPy array
+Case 1: Sort array by the second row
+Case 2: Sort the array by the second column
+sampleArray = numpy.array([[34,43,73],[82,22,12],[53,94,66]])
+import numpy as np
+
+# Case 1: Sort array by the second row
+sampleArray = np.array([[34, 43, 73], [82, 22, 12], [53, 94, 66]])
+sorted_array_row = sampleArray[:, sampleArray[1, :].argsort()]
+
+# Case 2: Sort array by the second column
+sorted_array_col = sampleArray[sampleArray[:, 1].argsort()]
+
+print("Sorted array by the second row:\n", sorted_array_row)
+print("\nSorted array by the second column:\n", sorted_array_col)
+
+
+28.	Take two input strings, concatenate them, and print the output. Also, Reverse the string and print it.
+
+# Concatenate and reverse strings
+string1 = input("Enter the first string: ")
+string2 = input("Enter the second string: ")
+
+concatenated_string = string1 + string2
+reversed_string = concatenated_string[::-1]
+
+print("Concatenated String:", concatenated_string)
+print("Reversed String:", reversed_string)
+
+29.	Write a Python program to find maximum and minimum K elements in Tuple. Take user input for K.
+
+# Find maximum and minimum K elements in Tuple
+k = int(input("Enter the value of K: "))
+my_tuple = (5, 8, 2, 10, 3, 7, 1)
+
+max_k_elements = sorted(my_tuple, reverse=True)[:k]
+min_k_elements = sorted(my_tuple)[:k]
+
+print(f"Maximum {k} elements: {max_k_elements}")
+print(f"Minimum {k} elements: {min_k_elements}")
+
+30.	Write a python program to search some literals strings in a string from a file.
+Sample text : “the quick brown fox jumps over the lazy dog”
+Searched words : “fox”,”dog”,”horse”
+
+# Search literal strings in a string from a file
+sample_text = "the quick brown fox jumps over the lazy dog"
+
+search_words = ["fox", "dog", "horse"]
+
+for word in search_words:
+    if word in sample_text:
+        print(f"{word} found in the text.")
+    else:
+        print(f"{word} not found in the text.")
