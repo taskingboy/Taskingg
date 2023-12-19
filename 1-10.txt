@@ -1,0 +1,327 @@
+
+1.	Write a Python program to merge two text files and also count the number of lines in the merged text file.
+
+# Function to merge two text files and count lines
+def merge_and_count_lines(file1_path, file2_path, merged_file_path):
+    try:
+        # Open the first file in read mode
+        with open(file1_path, 'r') as file1:
+            # Read content of the first file
+            content1 = file1.read()
+
+        # Open the second file in read mode
+        with open(file2_path, 'r') as file2:
+            # Read content of the second file
+            content2 = file2.read()
+
+        # Combine the content of the two files
+        merged_content = content1 + '\n' + content2
+
+        # Write the merged content to a new file
+        with open(merged_file_path, 'w') as merged_file:
+            merged_file.write(merged_content)
+
+        # Count the number of lines in the merged file
+        with open(merged_file_path, 'r') as merged_file:
+            line_count = len(merged_file.readlines())
+
+        print(f'Merged file created at {merged_file_path}')
+        print(f'Number of lines in the merged file: {line_count}')
+
+    except Exception as e:
+        print(f'An error occurred: {e}')
+
+# Example usage
+merge_and_count_lines('file1.txt', 'file2.txt', 'merged_file.txt')
+
+2.	Create a class STORE to keep track of products (Product Code, Name and price). Display the menu of all products to the user. Generate bill as per order
+
+
+# Define the STORE class
+class STORE:
+    def __init__(self):
+        # Initialize an empty dictionary to store products
+        self.products = {}
+
+    def add_product(self, code, name, price):
+        # Add a product to the dictionary
+        self.products[code] = {'name': name, 'price': price}
+
+    def display_menu(self):
+        # Display the menu of all products
+        print('Product Menu:')
+        for code, info in self.products.items():
+            print(f'{code}: {info["name"]} - ${info["price"]}')
+
+    def generate_bill(self, order):
+        total_cost = 0
+        print('\nYour Bill:')
+        print('Product\t\t\tPrice')
+        print('-------------------------')
+        for code, quantity in order.items():
+            if code in self.products:
+                product_info = self.products[code]
+                cost = product_info['price'] * quantity
+                total_cost += cost
+                print(f'{product_info["name"]}\t\t${product_info["price"]} x {quantity}\t\t${cost}')
+            else:
+                print(f'Product with code {code} not found in the menu')
+
+        print('-------------------------')
+        print(f'Total\t\t\t\t${total_cost}')
+
+# Example usage
+store = STORE()
+store.add_product('P001', 'Product1', 10.99)
+store.add_product('P002', 'Product2', 15.50)
+store.add_product('P003', 'Product3', 8.75)
+
+store.display_menu()
+
+order = {'P001': 2, 'P002': 1, 'P004': 3}  # User's order
+store.generate_bill(order)
+
+3.	Write a Python program to sort a list of elements using the selection sort algorithm
+
+# Function to perform selection sort on a list
+def selection_sort(input_list):
+    n = len(input_list)
+
+    # Traverse through all array elements starting from 0
+    for i in range(n):
+        # Find the minimum element in the remaining unsorted array
+        min_index = i
+        for j in range(i + 1, n):
+            if input_list[j] < input_list[min_index]:
+                min_index = j
+
+        # Swap the found minimum element with the first element
+        input_list[i], input_list[min_index] = input_list[min_index], input_list[i]
+
+# Example usage
+my_list = [64, 25, 12, 22, 11]
+print(f'Original List: {my_list}')
+
+selection_sort(my_list)
+
+print(f'Sorted List: {my_list}')
+
+
+4.	Write a Python class that has two methods get_string and print_string. Get_string accept a string from the user and print_string print the string in upper case.
+
+
+class StringManipulator:
+    def __init__(self):
+        self.input_string = ""
+
+    def get_string(self):
+        # Accept a string from the user
+        self.input_string = input("Enter a string: ")
+
+    def print_string(self):
+        # Print the string in upper case
+        print("Uppercase String:", self.input_string.upper())
+
+# Example usage
+string_manipulator = StringManipulator()
+string_manipulator.get_string()
+string_manipulator.print_string()
+
+
+5.	Write a python program to count repeated characters in a string 
+Sample String :”thequickbrownfoxjumpsoverthelazydog”
+Expected output:
+o  4
+e  3
+u  2
+h  2
+r   2
+t   2
+
+def count_repeated_characters(input_string):
+    char_count = {}
+    
+    for char in input_string:
+        if char.isalpha():
+            char = char.lower()
+            char_count[char] = char_count.get(char, 0) + 1
+
+    for char, count in char_count.items():
+        if count > 1:
+            print(f'{char}: {count}')
+
+# Example usage
+sample_string = "thequickbrownfoxjumpsoverthelazydog"
+print("Sample String:", sample_string)
+print("Repeated Characters:")
+count_repeated_characters(sample_string)
+
+
+6.	Print the pyramid
+*
+*   *
+*   *    *
+      AND
+       Print the pattern
+       *    *    *
+       *    *    *
+       *    *    *
+
+# Pyramid
+def print_pyramid(rows):
+    for i in range(1, rows + 1):
+        for j in range(1, i + 1):
+            print("*", end="   ")
+        print()
+
+# Example usage
+print("Pyramid:")
+print_pyramid(3)
+
+# Pattern
+def print_pattern(rows):
+    for i in range(rows):
+        for j in range(3):
+            print("*", end="    ")
+        print()
+
+# Example usage
+print("\nPattern:")
+print_pattern(3)
+
+7.	Print the pyramid
+1
+1   2
+1   2    3
+def print_number_pyramid(rows):
+    for i in range(1, rows + 1):
+        for j in range(1, i + 1):
+            print(j, end="   ")
+        print()
+
+# Example usage
+print("Number Pyramid:")
+print_number_pyramid(3)
+8.	Write a python program to print the alphabet pattern ‘O’ and the pattern ‘P’
+
+Expected Output:
+***
+*  *
+*  *
+*  *
+*  *
+*  *
+***
+AND
+****
+*     *
+*     *
+****
+*
+*
+*
+
+# Alphabet Pattern 'O'
+def print_pattern_O():
+    print("***")
+    print("* *")
+    print("* *")
+    print("* *")
+    print("* *")
+    print("* *")
+    print("***")
+
+# Alphabet Pattern 'P'
+def print_pattern_P():
+    print("****")
+    print("*   *")
+    print("*   *")
+    print("****")
+    print("*")
+    print("*")
+    print("*")
+
+# Example usage
+print("Alphabet Pattern 'O':")
+print_pattern_O()
+
+print("\nAlphabet Pattern 'P':")
+print_pattern_P()
+
+9.	Create an EMPLOYEE class for storing details(Name, Designation, gender, date of joining and salary).Define function members to compute
+a.	Total number of employees in an organization
+b.	Count male and female employees
+c.	An employee with a salary of more than 10,000
+d.	Employee with designation “Manager”
+class EMPLOYEE:
+    # Class variable to store the total number of employees
+    total_employees = 0
+
+    def __init__(self, name, designation, gender, join_date, salary):
+        self.name = name
+        self.designation = designation
+        self.gender = gender
+        self.join_date = join_date
+        self.salary = salary
+
+        # Increment the total number of employees when a new employee is created
+        EMPLOYEE.total_employees += 1
+
+    @staticmethod
+    def total_employees_in_organization():
+        return EMPLOYEE.total_employees
+
+    @staticmethod
+    def count_male_and_female_employees(employees_list):
+        male_count = sum(1 for emp in employees_list if emp.gender.lower() == 'male')
+        female_count = sum(1 for emp in employees_list if emp.gender.lower() == 'female')
+        return male_count, female_count
+
+    @staticmethod
+    def employees_with_salary_above_10000(employees_list):
+        return [emp for emp in employees_list if emp.salary > 10000]
+
+    @staticmethod
+    def employees_with_designation_manager(employees_list):
+        return [emp for emp in employees_list if emp.designation.lower() == 'manager']
+
+# Example usage
+employee1 = EMPLOYEE("John Doe", "Manager", "Male", "2022-01-01", 12000)
+employee2 = EMPLOYEE("Jane Doe", "Developer", "Female", "2022-02-01", 8000)
+employee3 = EMPLOYEE("Bob Smith", "Manager", "Male", "2022-03-01", 15000)
+
+employees_list = [employee1, employee2, employee3]
+
+print("Total Employees in Organization:", EMPLOYEE.total_employees_in_organization())
+print("Male and Female Employee Counts:", EMPLOYEE.count_male_and_female_employees(employees_list))
+print("Employees with Salary above 10,000:", EMPLOYEE.employees_with_salary_above_10000(employees_list))
+print("Employees with Designation 'Manager':", EMPLOYEE.employees_with_designation_manager(employees_list))
+
+
+
+10.	Write a Python program to construct the following pattern using a nested loop
+*
+*   *
+*   *    *
+*   *    *    *   
+*   *    *    *    *
+*   *    *    *   
+*   *    *
+*   *
+*
+
+# Nested Loop Pattern
+def print_nested_loop_pattern(rows):
+    for i in range(rows):
+        for j in range(i + 1):
+            print("*", end="   ")
+        print()
+    for i in range(rows - 2, -1, -1):
+        for j in range(i + 1):
+            print("*", end="   ")
+        print()
+
+# Example usage
+print("Nested Loop Pattern:")
+print_nested_loop_pattern(5)
+
