@@ -1,0 +1,32 @@
+def print_pattern_o(size):
+    for i in range(size):
+        for j in range(size):
+            if (i == 0 or i == size - 1) and (j > 0 and j < size - 1):
+                print('*', end=' ')
+            elif (j == 0 or j == size - 1) and (i > 0 and i < size - 1):
+                print('*', end=' ')
+            else:
+                print(' ', end=' ')
+        print()
+
+def print_pattern_p(size):
+    for i in range(size):
+        for j in range(size):
+            if (j == 0 or (i == 0 or i == size // 2) and (j < size - 1)) or ((i < size // 2) and (j == size - 1)):
+                print('*', end=' ')
+            else:
+                print(' ', end=' ')
+        print()
+
+# Example usage:
+if __name__ == "__main__":
+    # Specify the size of the patterns
+    pattern_size = 5
+
+    # Print pattern 'O'
+    print("Pattern 'O':")
+    print_pattern_o(pattern_size)
+
+    # Print pattern 'P'
+    print("\nPattern 'P':")
+    print_pattern_p(pattern_size)
